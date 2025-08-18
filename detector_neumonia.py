@@ -13,29 +13,38 @@ import tkcap
 import img2pdf
 import numpy as np
 import time
-tf.compat.v1.disable_eager_execution()
-tf.compat.v1.experimental.output_all_intermediates(True)
+import tensorflow as tf
+from tensorflow.keras import backend as K # type: ignore
+#tf.compat.v1.disable_eager_execution()
+#tf.compat.v1.experimental.output_all_intermediates(True)
 import cv2
-
+import pydicom
 
 def grad_cam(array):
     img = preprocess(array)
-    model = model_fun()
-    preds = model.predict(img)
-    argmax = np.argmax(preds[0])
-    output = model.output[:, argmax]
-    last_conv_layer = model.get_layer("conv10_thisone")
-    grads = K.gradients(output, last_conv_layer.output)[0]
-    pooled_grads = K.mean(grads, axis=(0, 1, 2))
-    iterate = K.function([model.input], [pooled_grads, last_conv_layer.output[0]])
-    pooled_grads_value, conv_layer_output_value = iterate(img)
-    for filters in range(64):
-        conv_layer_output_value[:, :, filters] *= pooled_grads_value[filters]
-    # creating the heatmap
-    heatmap = np.mean(conv_layer_output_value, axis=-1)
-    heatmap = np.maximum(heatmap, 0)  # ReLU
-    heatmap /= np.max(heatmap)  # normalize
-    heatmap = cv2.resize(heatmap, (img.shape[1], img.shape[2]))
+    model = tf.keras.models.load_model('conv_MLP_84.h5', compile=False)
+    grad_model = tf.keras.models.Model(
+        model.inputs, [model.get_layer("conv10_thisone").output, model.output]
+    )
+
+    with tf.GradientTape() as tape:
+        last_conv_layer_output, preds = grad_model([img])
+        if isinstance(preds, list):
+            preds = preds[0]
+        pred_index = tf.argmax(preds[0])
+        class_channel = preds[:, pred_index]
+    
+    grads = tape.gradient(class_channel, last_conv_layer_output)
+    
+    pooled_grads = tf.reduce_mean(grads, axis=(0, 1, 2))
+    
+    last_conv_layer_output = last_conv_layer_output[0]
+    heatmap = last_conv_layer_output @ pooled_grads[..., tf.newaxis]
+    heatmap = tf.squeeze(heatmap)
+    
+    heatmap = tf.maximum(heatmap, 0) / (tf.math.reduce_max(heatmap) + 1e-9)
+    heatmap = heatmap.numpy()
+    heatmap = cv2.resize(heatmap, (512, 512))
     heatmap = np.uint8(255 * heatmap)
     heatmap = cv2.applyColorMap(heatmap, cv2.COLORMAP_JET)
     img2 = cv2.resize(array, (512, 512))
@@ -46,12 +55,11 @@ def grad_cam(array):
     superimposed_img = superimposed_img.astype(np.uint8)
     return superimposed_img[:, :, ::-1]
 
-
 def predict(array):
     #   1. call function to pre-process image: it returns image in batch format
     batch_array_img = preprocess(array)
     #   2. call function to load model and predict: it returns predicted class and probability
-    model = model_fun()
+    model = tf.keras.models.load_model('conv_MLP_84.h5', compile=False)
     # model_cnn = tf.keras.models.load_model('conv_MLP_84.h5')
     prediction = np.argmax(model.predict(batch_array_img))
     proba = np.max(model.predict(batch_array_img)) * 100
@@ -66,9 +74,8 @@ def predict(array):
     heatmap = grad_cam(array)
     return (label, proba, heatmap)
 
-
 def read_dicom_file(path):
-    img = dicom.read_file(path)
+    img = pydicom.dcmread(path)
     img_array = img.pixel_array
     img2show = Image.fromarray(img_array)
     img2 = img_array.astype(float)
@@ -76,7 +83,6 @@ def read_dicom_file(path):
     img2 = np.uint8(img2)
     img_RGB = cv2.cvtColor(img2, cv2.COLOR_GRAY2RGB)
     return img_RGB, img2show
-
 
 def read_jpg_file(path):
     img = cv2.imread(path)
@@ -87,7 +93,6 @@ def read_jpg_file(path):
     img2 = np.uint8(img2)
     return img2, img2show
 
-
 def preprocess(array):
     array = cv2.resize(array, (512, 512))
     array = cv2.cvtColor(array, cv2.COLOR_BGR2GRAY)
@@ -97,7 +102,6 @@ def preprocess(array):
     array = np.expand_dims(array, axis=-1)
     array = np.expand_dims(array, axis=0)
     return array
-
 
 class App:
     def __init__(self):
@@ -194,8 +198,16 @@ class App:
             ),
         )
         if filepath:
-            self.array, img2show = read_dicom_file(filepath)
-            self.img1 = img2show.resize((250, 250), Image.ANTIALIAS)
+            file_extension = filepath.lower().split('.')[-1]
+            if file_extension == 'dcm':
+                self.array, img2show = read_dicom_file(filepath)
+            elif file_extension in ['jpeg','jpg','png']:
+                self.array, img2show = read_jpg_file(filepath)
+            else:
+                showinfo(title="Error", message="Tipo de archivo no soportado.")
+                return
+            
+            self.img1 = img2show.resize((250, 250), Image.Resampling.LANCZOS)
             self.img1 = ImageTk.PhotoImage(self.img1)
             self.text_img1.image_create(END, image=self.img1)
             self.button1["state"] = "enabled"
@@ -203,7 +215,7 @@ class App:
     def run_model(self):
         self.label, self.proba, self.heatmap = predict(self.array)
         self.img2 = Image.fromarray(self.heatmap)
-        self.img2 = self.img2.resize((250, 250), Image.ANTIALIAS)
+        self.img2 = self.img2.resize((250, 250), Image.Resampling.LANCZOS)
         self.img2 = ImageTk.PhotoImage(self.img2)
         print("OK")
         self.text_img2.image_create(END, image=self.img2)
