@@ -1,18 +1,24 @@
-## Hola! Bienvenido a la herramienta para la detección rápida de neumonía
+# Proyecto Neumonía 
 
-Deep Learning aplicado en el procesamiento de imágenes radiográficas de tórax en formato DICOM con el fin de clasificarlas en 3 categorías diferentes:
+## Índice 
+- Descripción del proyecto
+- Aplicación
+- Herramientas utilizadas
+- Acceso al proyecto
+- Contribuidores
+- Licencia
 
-1. Neumonía Bacteriana
+## Descripción del proyecto:
+Este proyecto implementa técnicas de Deep Learning para el procesamiento de imágenes radiográficas de tórax en formato DICOM, con el propósito de realizar su clasificación en tres categorías clínicas: Neumonía Bacteriana, Neumonía Viral y Sin Neumonía. La clasificación automática de este tipo de imágenes constituye una herramienta de apoyo potencial para el diagnóstico médico, aportando rapidez y precisión en la detección de patologías respiratorias.
 
-2. Neumonía Viral
+Se implementa una red neuronal convolucional (CNN) basada en la arquitectura propuesta por Pasa et al., compuesta por cinco bloques convolucionales con conexiones residuales y capas densas finales para la clasificación. Para mejorar la interpretabilidad del modelo se incorpora la técnica Grad-CAM, que genera mapas de calor sobre la radiografía y permite identificar las regiones más relevantes utilizadas en el proceso de decisión. De este modo, el proyecto no solo busca un alto desempeño en la clasificación de imágenes médicas, sino también aportar transparencia y apoyo visual en la validación clínica de los resultados.
 
-3. Sin Neumonía
+<img width="815" height="589" alt="image" src="https://github.com/user-attachments/assets/878c6a4d-17ca-49e9-a7a5-0dd43278bfbd" />
 
-Aplicación de una técnica de explicación llamada Grad-CAM para resaltar con un mapa de calor las regiones relevantes de la imagen de entrada.
 
 ---
 
-## Uso de la herramienta:
+## Aplicación:
 
 A continuación le explicaremos cómo empezar a utilizarla.
 
@@ -99,9 +105,9 @@ Es una técnica utilizada para resaltar las regiones de una imagen que son impor
 
 Grad-CAM realiza el cálculo del gradiente de la salida correspondiente a la clase a visualizar con respecto a las neuronas de una cierta capa de la CNN. Esto permite tener información de la importancia de cada neurona en el proceso de decisión de esa clase en particular. Una vez obtenidos estos pesos, se realiza una combinación lineal entre el mapa de activaciones de la capa y los pesos, de esta manera, se captura la importancia del mapa de activaciones para la clase en particular y se ve reflejado en la imagen de entrada como un mapa de calor con intensidades más altas en aquellas regiones relevantes para la red con las que clasificó la imagen en cierta categoría.
 
-## Proyecto original realizado por:
+## Contribuidores:
 
-Johan Sebastian Sanchez Navas - https://github.com/JSebastianSanchezN
-Angel David Duarte Loaiza - https://github.com/AngelDDL
-Sharis Aranxa Barbosa Prado - https://github.com/SAranxa
-Santiago Cortes Murcia - 
+* Johan Sebastian Sanchez Navas - https://github.com/JSebastianSanchezN
+* Angel David Duarte Loaiza - https://github.com/AngelDDL
+* Sharis Aranxa Barbosa Prado - https://github.com/SAranxa
+* Santiago Cortes Murcia - 
