@@ -1,7 +1,17 @@
+"""
+Este módulo contiene funciones para el preprocesamiento de imágenes.
+Incluye redimensionamiento, conversión a escala de grises, CLAHE, 
+normalización y ajuste de dimensiones para deep learning.
+"""
+
 import cv2
 import numpy as np
 
 def preprocess(array):
+    """
+    Preprocesa una imagen: redimensiona, convierte a escala de grises,
+    aplica CLAHE, normaliza y expande dimensiones.
+    """
     array = cv2.resize(array , (512 , 512))
     array = cv2.cvtColor(array, cv2.COLOR_BGR2GRAY)
     clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(4,4))
