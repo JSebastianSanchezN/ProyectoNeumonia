@@ -152,8 +152,10 @@ ProyectoNeumonia/
 │
 ├── tests/                  # Pruebas unitarias
 │   ├── .gitkeep
-│   ├── test_preprocess.py
-│   └── test_integrator.py
+│   ├── test_detector.py
+|   ├── test_load_model.py
+|   ├── test_preprocess.py
+│   └── test_read_img.py
 │
 ├── .gitignore              # Ignorar modelo .h5 y datos pesados
 ├── conv_MLP_84.h5          # Modelo CNN
