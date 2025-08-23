@@ -11,7 +11,8 @@
 - Estructura del Proyecto   
 - Docker  
 - Contribuidores  
-- Licencia  
+- Licencia
+- Observaciones
 
 ---
 
@@ -44,7 +45,10 @@ El desarrollo sigue el patrón de diseño **MVC (Modelo-Vista-Controlador)**, co
    ```bash
    uv pip install -r requirements.txt
 
-Versión de Python: Python 3.11.9
+**Versión de Python:** `Python 3.11.9`  
+
+⚠️ **Nota:** Las versiones posteriores a Python 3.11.9 presentaron problemas de compatibilidad con **Tkinter**, por lo que se recomienda utilizar esta versiónpara garantizar una ejecución estable.
+
 
 ---
 ## Ejecución
@@ -61,19 +65,19 @@ Para ejecutar el proyecto se tienen dos opciones
 ## Flujo de Procesamiento
 
 El sistema sigue una arquitectura modular (MVC). Cada script cumple una función específica:
-* detector_neumonia.py – Interfaz gráfica con Tkinter.
-* read_img.py – Lee imágenes en formato DICOM y las convierte en arreglos.
-* preprocess_img.py – Preprocesamiento (resize, escala de grises, CLAHE, normalización, batch tensor).
-* load_model.py – Carga el modelo (WilhemNet86.h5).
-* grad_cam.py – Genera predicción, probabilidad y mapa Grad-CAM.
-* integrator.py – Integra todos los módulos y devuelve clase, probabilidad y mapa de calor.
+* `detector_neumonia.py` – Interfaz gráfica con Tkinter.
+* `read_img.py` – Lee imágenes en formato DICOM y las convierte en arreglos.
+* `preprocess_img.py` – Preprocesamiento (resize, escala de grises, CLAHE, normalización, batch tensor).
+* `load_model.py` – Carga el modelo (WilhemNet86.h5).
+* `grad_cam.py` – Genera predicción, probabilidad y mapa Grad-CAM.
+* `integrator.py` – Integra todos los módulos y devuelve clase, probabilidad y mapa de calor.
 
 ---
 ## Uso de la Interfaz Gráfica
 
 https://github.com/user-attachments/assets/4c7cf5ce-1efb-4ade-b27d-20178cdcda4c
 
-Paso a paso:
+**Paso a paso:**
 1. Ingrese la cédula del paciente.
 2. Presione Cargar Imagen y seleccione un archivo JPEG de la carpeta que se encuentra en el repositorio.
 4. Presione Predecir para ver los resultados.
@@ -86,20 +90,27 @@ Paso a paso:
 
 Ejemplo de salida del sistema:
 
-Imagen original (DICOM)
+
+
+Imagen original
+
+<img src="https://github.com/user-attachments/assets/4d3b1c21-d9e3-4d80-b411-130aa939e0e7" alt="Imágen original" width="300"/>
 
 Imagen procesada
 
+<img src="https://github.com/user-attachments/assets/df731296-1abc-422e-9b14-ef4a616bec6a" alt="Imágen procesada" width="250"/>
+
+
 Predicción de clase y probabilidad
 
-Mapa de calor generado por Grad-CAM
 
 ---
 ## Pruebas Unitarias
 
 Se incluyen pruebas con pytest en la carpeta tests/.
+
 Ejecutar con:
-pytest.py
+`pytest.py`
 
 ---
 ## Estructura del Proyecto
@@ -127,17 +138,44 @@ pytest.py
 
 
 ---
+## Docker
+
+Completar...
+
+---
 ## Contribuidores
 
-Johan Sebastian Sanchez Navas – GitHub
+Johan Sebastian Sanchez Navas – [GitHub](https://github.com/JSebastianSanchezN)
 
-Angel David Duarte Loaiza – GitHub
+Angel David Duarte Loaiza – [GitHub](https://github.com/AngelDDL)
 
-Sharis Aranxa Barbosa Prado – GitHub
+Sharis Aranxa Barbosa Prado – [GitHub](https://github.com/SAranxa)
 
-Santiago Cortes Murcia – GitHub
+Santiago Cortes Murcia – [GitHub](https://github.com/SantiagoCorM)
 
 ---
 ## Licencia
 Este proyecto se distribuye bajo la licencia MIT.
+
 Ver archivo LICENSE para más detalles.
+
+---
+
+## Observaciones
+
+Durante las pruebas del sistema se identificó una situación relacionada con la visualización de la interfaz gráfica en **Tkinter**:
+
+- En algunos computadores la interfaz se presenta correctamente alineada, mostrando todos los cuadros de texto y etiquetas de manera legible.  
+- En otros equipos, ciertos elementos como el cuadro de texto para ingresar la **cédula del paciente** no aparecen completos y otros se cruzan parcialmente.  
+
+**Interfaz visualizada correctamente:**  
+
+<img width="814" height="590" alt="image" src="https://github.com/user-attachments/assets/25478b43-4ade-4d60-a6ec-e88170e129f7" />
+
+**Interfaz con problemas de visualización:**  
+
+<img width="1111" height="746" alt="image" src="https://github.com/user-attachments/assets/6055371c-0f63-4615-bc20-b5ba76c790fe" />
+
+
+⚠️ **Nota:** Este comportamiento puede deberse a diferencias en la resolución de pantalla, la escala de visualización de Windows o la versión de Python/Tkinter instalada.  
+
