@@ -44,6 +44,8 @@ El desarrollo sigue el patrón de diseño **MVC (Modelo-Vista-Controlador)**, co
    ```bash
    uv pip install -r requirements.txt
 
+Versión de Python: Python 3.11.9
+
 ---
 ## Ejecución
 
@@ -54,8 +56,6 @@ Para ejecutar el proyecto se tienen dos opciones
 * De lo contrario, se ejecuta:
      ```bash
      uv run detector_neumonia.py
-
-Versión de Python probada: Python 3.11.9
 
 ---
 ## Flujo de Procesamiento
@@ -71,19 +71,15 @@ El sistema sigue una arquitectura modular (MVC). Cada script cumple una función
 ---
 ## Uso de la Interfaz Gráfica
 
-Ingrese la cédula del paciente.
+https://github.com/user-attachments/assets/4c7cf5ce-1efb-4ade-b27d-20178cdcda4c
 
-Presione Cargar Imagen y seleccione un archivo DICOM.
-
-Imágenes de prueba disponibles en: Google Drive
-
-Presione Predecir para ver los resultados.
-
-Presione Guardar para almacenar resultados en .csv.
-
-Presione PDF para exportar un informe (librería utilizada: tkcap).
-
-Presione Borrar para reiniciar el proceso.
+Paso a paso:
+1. Ingrese la cédula del paciente.
+2. Presione Cargar Imagen y seleccione un archivo JPEG de la carpeta que se encuentra en el repositorio.
+4. Presione Predecir para ver los resultados.
+5. Presione Guardar para almacenar resultados en .csv.
+6. Presione PDF para exportar un informe.
+7. Presione Borrar para reiniciar el proceso.
 
 ---
 ## Resultados
@@ -100,9 +96,10 @@ Mapa de calor generado por Grad-CAM
 
 ---
 ## Pruebas Unitarias
+
 Se incluyen pruebas con pytest en la carpeta tests/.
 Ejecutar con:
-pytest
+pytest.py
 
 ---
 ## Estructura del Proyecto
