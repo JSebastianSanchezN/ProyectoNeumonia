@@ -79,7 +79,7 @@ https://github.com/user-attachments/assets/4c7cf5ce-1efb-4ade-b27d-20178cdcda4c
 
 **Paso a paso:**
 1. Ingrese la cédula del paciente.
-2. Presione Cargar Imagen y seleccione un archivo JPEG de la carpeta que se encuentra en el repositorio.
+2. Presione Cargar Imagen y seleccione un archivo de la carpeta data que se encuentra en el repositorio.
 4. Presione Predecir para ver los resultados.
 5. Presione Guardar para almacenar resultados en .csv.
 6. Presione PDF para exportar un informe.
@@ -119,30 +119,46 @@ Ejecutar con:
 ```plaintext
 ProyectoNeumonia/
 ├── data/                   # Datos (pruebas o entrenamiento)
-│   ├── raw/                # Datos sin procesar
-│   ├── processed/          # Datos preprocesados
-│   └── external/           # Datos externos
+│   ├── DICOM/
+│   │     ├── normal(2).dcm
+│   │     ├── normal(3).dcm
+│   │     ├── viral(2).dcm
+│   │     ├── viral(3).dcm             
+│   ├── JPG/
+│   │     ├── Prueba.jpg
+│   │     ├── Prueba2.jpeg      
+│
+├── reports/                # Reportes y figuras
 │
 ├── src/                    # Código fuente
-│   ├── read_img.py
-│   ├── preprocess_img.py
-│   ├── load_model.py
+│   ├── controller
+│   │     ├── grad_cam.py
+│   │     ├── integrator.py
+│   ├── model
+│   │     ├── load_model.py
+│   │     ├── preprocess_img.py
+│   │     ├── read_img.py
+│   ├── view
+│   │     ├── detector_neumonia.py
 │   ├── grad_cam.py
 │   ├── integrator.py
 │   └── detector_neumonia.py
 │
 ├── tests/                  # Pruebas unitarias
+│   ├── .gitkeep
 │   ├── test_preprocess.py
 │   └── test_integrator.py
 │
-├── reports/                # Reportes y figuras
-├── docs/                   # Documentación adicional
-│
-├── requirements.txt        # Dependencias con versiones
 ├── .gitignore              # Ignorar modelo .h5 y datos pesados
+├── conv_MLP_84.h5          # Modelo CNN
+├── Dockerfile              # Archivo Docker
 ├── LICENSE                 # Licencia
-└── README.md               # Este archivo
-
+├── main.py                 # Archivo de inicio
+├── Makefile                # Archivo make
+├── pyproject.toml          
+├── README.md               # Este archivo
+├── requirements.txt        # Dependencias con versiones
+└── uv.lock
 ```
 
 ---
