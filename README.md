@@ -12,7 +12,6 @@
 - Docker  
 - Contribuidores  
 - Licencia
-- Observaciones
 
 ---
 
