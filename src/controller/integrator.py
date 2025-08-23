@@ -1,9 +1,9 @@
 import numpy as np
 import tensorflow as tf
 
-import grad_cam
-import preprocess_img
-import load_model
+from ..controller import grad_cam
+from ..model import preprocess_img
+from ..model import load_model
 
 
 def predict(array):

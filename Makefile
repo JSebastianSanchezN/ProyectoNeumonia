@@ -1,2 +1,2 @@
 cod:
-	uv run detector_neumonia.py
+	uv run -m src.view.detector_neumonia

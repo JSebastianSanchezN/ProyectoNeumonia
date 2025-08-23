@@ -14,6 +14,7 @@ y exportar reportes en PDF.
 import csv
 import getpass
 import time
+import os
 
 # ========================
 # Importaciones de terceros
@@ -30,8 +31,8 @@ import numpy as np
 # ========================
 # Importaciones locales
 # ========================
-import read_img
-import integrator
+from ..model import read_img
+from ..controller import integrator
 
 
 class App:
@@ -126,7 +127,7 @@ class App:
     def load_img_file(self):
         """Carga una imagen (DICOM o JPG/PNG) y la muestra en la interfaz."""
         filepath = filedialog.askopenfilename(
-            initialdir="/",
+            initialdir="data",
             title="Select image",
             filetypes=(
                 ('DICOM', '*.dcm'),
@@ -166,7 +167,7 @@ class App:
 
     def save_results_csv(self):
         """Guarda los resultados de la predicción en un archivo CSV."""
-        with open('historial.csv', 'a') as csvfile:
+        with open('reports/historial.csv', 'a') as csvfile:
             w = csv.writer(csvfile, delimiter='-')
             w.writerow([
                 self.text1.get(),
@@ -180,10 +181,12 @@ class App:
         """Genera un archivo PDF con captura de la interfaz."""
         cap = tkcap.CAP(self.root)
         ID = 'Reporte' + str(self.reportID) + '.jpg'
-        img = cap.capture(ID)
-        img = Image.open(ID)
+        img_path = os.path.join('reports', ID)
+        img = cap.capture(img_path)
+        img = Image.open(img_path)
         img = img.convert('RGB')
-        pdf_path = r'Reporte' + str(self.reportID) + '.pdf'
+        pdf_filename = r'Reporte' + str(self.reportID) + '.pdf'
+        pdf_path = os.path.join('reports', pdf_filename)
         img.save(pdf_path)
         self.reportID += 1
         showinfo(title='PDF', message='El PDF fue generado con éxito.')
