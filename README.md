@@ -107,10 +107,20 @@ Predicción de clase y probabilidad:
 ---
 ## Pruebas Unitarias
 
-Se incluyen pruebas con pytest en la carpeta `tests/`.
+El proyecto incluye pruebas unitarias implementadas con **pytest**, ubicadas en la carpeta `tests/`.
 
-Ejecutar con:
-`pytest`
+Estas pruebas validan:
+- **Preprocesamiento de imágenes** (`test_preprocess.py`): tamaño y normalización de la salida.
+- **Carga de modelo** (`test_load_model.py`): verificación de que se obtiene un objeto de tipo `tf.keras.Model`.
+- **Lectura de imágenes** (`test_read_img.py`): lectura de archivos JPG y DICOM (con mocks para simular datos).
+- **Interfaz gráfica y predicción** (`test_detector.py`): se prueba la lógica de `run_model` usando *mocks* para evitar dependencias gráficas reales.
+
+### Ejecución local
+Desde la raíz del proyecto (con el entorno virtual activado):
+
+```bash
+     pytest -v
+```
 
 ---
 ## Estructura del Proyecto
@@ -160,7 +170,28 @@ ProyectoNeumonia/
 ---
 ## Docker
 
-Completar...
+El proyecto cuenta con un `Dockerfile` que permite empaquetar el entorno completo, incluyendo dependencias y pruebas unitarias.  
+De esta forma, se garantiza que el código pueda ejecutarse en cualquier sistema con Docker instalado.
+
+### Construcción de la imagen
+Desde la raíz del proyecto:
+```bash
+     docker build -t neumonia-app .
+```
+
+### Correr pruebas unitarias en docker
+Para correr todas las pruebas unitarias en un contenedor temporal:
+
+```bash
+     docker run --rm neumonia-app
+```
+
+### Correr app directamente:
+Si se desea ejecutar directamente la aplicación en lugar de las pruebas:
+
+```bash
+     docker run --rm neumonia-app python main.py
+```
 
 ---
 ## Contribuidores
