@@ -12,7 +12,6 @@
 - Docker  
 - Contribuidores  
 - Licencia
-- Observaciones
 
 ---
 
@@ -45,7 +44,7 @@ El desarrollo sigue el patrón de diseño **MVC (Modelo-Vista-Controlador)**, co
    ```bash
    uv pip install -r requirements.txt
 
-**Versión de Python:** `Python 3.11.9`  
+**Versión de Python recomendada:** `Python 3.11.9`  
 
 ⚠️ **Nota:** Las versiones posteriores a Python 3.11.9 presentaron problemas de compatibilidad con **Tkinter**, por lo que se recomienda utilizar esta versiónpara garantizar una ejecución estable.
 
@@ -79,11 +78,11 @@ https://github.com/user-attachments/assets/4c7cf5ce-1efb-4ade-b27d-20178cdcda4c
 
 **Paso a paso:**
 1. Ingrese la cédula del paciente.
-2. Presione Cargar Imagen y seleccione un archivo de la carpeta data que se encuentra en el repositorio.
-4. Presione Predecir para ver los resultados.
-5. Presione Guardar para almacenar resultados en .csv.
-6. Presione PDF para exportar un informe.
-7. Presione Borrar para reiniciar el proceso.
+2. Presione **Cargar Imagen** y seleccione un archivo de la carpeta `data/` que se encuentra en el repositorio.
+4. Presione **Predecir** para ver los resultados.
+5. Presione **Guardar** para almacenar resultados en `.csv`.
+6. Presione **PDF** para exportar un informe en PDF (se utiliza la librería tkcap).
+7. Presione **Borrar** para reiniciar el proceso.
 
 ---
 ## Resultados
@@ -119,8 +118,9 @@ Estas pruebas validan:
 ### Ejecución local
 Desde la raíz del proyecto (con el entorno virtual activado):
 
-``bash 
-pytest -v
+```bash
+     pytest -v
+```
 
 ---
 ## Estructura del Proyecto
@@ -149,9 +149,6 @@ ProyectoNeumonia/
 │   │     ├── read_img.py
 │   ├── view
 │   │     ├── detector_neumonia.py
-│   ├── grad_cam.py
-│   ├── integrator.py
-│   └── detector_neumonia.py
 │
 ├── tests/                  # Pruebas unitarias
 │   ├── .gitkeep
@@ -172,28 +169,29 @@ ProyectoNeumonia/
 
 ---
 ## Docker
-## Dockerización
 
 El proyecto cuenta con un `Dockerfile` que permite empaquetar el entorno completo, incluyendo dependencias y pruebas unitarias.  
 De esta forma, se garantiza que el código pueda ejecutarse en cualquier sistema con Docker instalado.
 
 ### Construcción de la imagen
 Desde la raíz del proyecto:
-
-``bash
-docker build -t neumonia-app .
+```bash
+     docker build -t neumonia-app .
+```
 
 ### Correr pruebas unitarias en docker
 Para correr todas las pruebas unitarias en un contenedor temporal:
 
-``bash
-docker run --rm neumonia-app
+```bash
+     docker run --rm neumonia-app
+```
 
 ### Correr app directamente:
 Si se desea ejecutar directamente la aplicación en lugar de las pruebas:
 
-``bash
-docker run --rm neumonia-app python main.py
+```bash
+     docker run --rm neumonia-app python main.py
+```
 
 ---
 ## Contribuidores
