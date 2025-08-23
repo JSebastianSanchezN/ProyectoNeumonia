@@ -120,7 +120,7 @@ Estas pruebas validan:
 Desde la raíz del proyecto (con el entorno virtual activado):
 
 ```bash
-     pytest -v
+     uv run pytest
 ```
 
 ---
