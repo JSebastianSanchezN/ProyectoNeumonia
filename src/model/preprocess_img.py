@@ -1,11 +1,18 @@
+# 1. Importaciones estándar de Python
+# (No hay en este caso)
+
+# 2. Importaciones de bibliotecas de terceros
+import cv2
+import numpy as np
+
+# 3. Importaciones locales
+# (No hay en este caso)
+
 """
 Este módulo contiene funciones para el preprocesamiento de imágenes.
 Incluye redimensionamiento, conversión a escala de grises, CLAHE, 
 normalización y ajuste de dimensiones para deep learning.
 """
-
-import cv2
-import numpy as np
 
 def preprocess(array):
     """

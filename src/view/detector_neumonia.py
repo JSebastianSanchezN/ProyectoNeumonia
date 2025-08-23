@@ -46,8 +46,12 @@ class App:
         # Fuente en negrita
         fonti = font.Font(weight='bold')
 
-        self.root.geometry("815x560")
-        self.root.resizable(0, 0)
+        # Configuración del grid
+        self.root.columnconfigure(0, weight=1)
+        self.root.columnconfigure(1, weight=1)
+        self.root.columnconfigure(2, weight=1)
+        self.root.columnconfigure(3, weight=1)
+        self.root.rowconfigure(2, weight=1)
 
         # Etiquetas
         self.lab1 = ttk.Label(self.root, text="Imagen Radiográfica",
@@ -69,14 +73,14 @@ class App:
         self.result = StringVar()
 
         # Caja de entrada para ID
-        self.text1 = ttk.Entry(self.root, textvariable=self.ID, width=10)
+        self.text1 = ttk.Entry(self.root, textvariable=self.ID, width=20)
         self.ID_content = self.text1.get()
 
         # Cajas de texto para imágenes y resultados
-        self.text_img1 = Text(self.root, width=31, height=15)
-        self.text_img2 = Text(self.root, width=31, height=15)
-        self.text2 = Text(self.root)
-        self.text3 = Text(self.root)
+        self.text_img1 = Text(self.root, width=40, height=20)
+        self.text_img2 = Text(self.root, width=40, height=20)
+        self.text2 = Text(self.root, width=15, height=2)
+        self.text3 = Text(self.root, width=15, height=2)
 
         # Botones
         self.button1 = ttk.Button(
@@ -97,22 +101,28 @@ class App:
         )
 
         # Posicionamiento de widgets
-        self.lab1.place(x=110, y=65)
-        self.lab2.place(x=545, y=65)
-        self.lab3.place(x=500, y=350)
-        self.lab4.place(x=65, y=350)
-        self.lab5.place(x=122, y=25)
-        self.lab6.place(x=500, y=400)
-        self.button1.place(x=220, y=460)
-        self.button2.place(x=70, y=460)
-        self.button3.place(x=670, y=460)
-        self.button4.place(x=520, y=460)
-        self.button6.place(x=370, y=460)
-        self.text1.place(x=200, y=350)
-        self.text2.place(x=610, y=350, width=90, height=30)
-        self.text3.place(x=610, y=400, width=90, height=30)
-        self.text_img1.place(x=65, y=90)
-        self.text_img2.place(x=500, y=90)
+        self.lab5.grid(row=0, column=0, columnspan=4, pady=10)
+        
+        self.lab1.grid(row=1, column=0, columnspan=2, sticky='s')
+        self.text_img1.grid(row=2, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")
+        
+        self.lab2.grid(row=1, column=2, columnspan=2, sticky='s')
+        self.text_img2.grid(row=2, column=2, columnspan=2, padx=10, pady=10, sticky="nsew")
+
+        self.lab4.grid(row=3, column=0, columnspan=2, pady=5)
+        self.text1.grid(row=4, column=0, columnspan=2, pady=5)
+
+        self.lab3.grid(row=3, column=2, sticky='e', pady=5)
+        self.text2.grid(row=3, column=3, sticky='w', pady=5)
+
+        self.lab6.grid(row=4, column=2, sticky='e', pady=5)
+        self.text3.grid(row=4, column=3, sticky='w', pady=5)
+
+        self.button2.grid(row=5, column=0, pady=10)
+        self.button1.grid(row=5, column=1, pady=10)
+        self.button6.grid(row=5, column=2, pady=10)
+        self.button4.grid(row=5, column=3, pady=10)
+        self.button3.grid(row=6, column=0, columnspan=4, pady=10)
 
         # Poner foco en ID del paciente
         self.text1.focus_set()

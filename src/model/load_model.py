@@ -1,6 +1,12 @@
+# 1. Importaciones estándar de Python
+# (No hay en este caso)
+
+# 2. Importaciones de bibliotecas de terceros
 import tensorflow as tf
 from tensorflow.keras import models  # type: ignore
 
+# 3. Importaciones locales
+# (No hay en este caso)
 
 def model():
     """

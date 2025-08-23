@@ -1,6 +1,11 @@
+# 1. Importaciones estándar de Python
+# (No hay en este caso)
+
+# 2. Importaciones de bibliotecas de terceros
 import numpy as np
 import tensorflow as tf
 
+# 3. Importaciones locales
 from ..controller import grad_cam
 from ..model import preprocess_img
 from ..model import load_model

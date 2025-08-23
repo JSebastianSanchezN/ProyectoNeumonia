@@ -1,13 +1,20 @@
+# 1. Importaciones estándar de Python
+# (No hay en este caso)
+
+# 2. Importaciones de bibliotecas de terceros
+import pydicom
+import numpy as np
+from PIL import ImageTk, Image
+import cv2
+
+# 3. Importaciones locales
+# (No hay en este caso)
+
 """
 Este módulo contiene funciones para la lectura y procesamiento de imágenes
 en formato DICOM y JPG. Ambas funciones retornan la imagen procesada en un 
 array NumPy y en un objeto PIL para su visualización.
 """
-
-import pydicom
-import numpy as np
-from PIL import ImageTk, Image
-import cv2
 
 def read_dicom_file(path):
     """Lee un archivo DICOM y retorna la imagen procesada en RGB y en formato PIL."""

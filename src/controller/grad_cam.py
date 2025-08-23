@@ -1,7 +1,12 @@
+# 1. Importaciones estándar de Python
+# (Ninguna en este caso)
+
+# 2. Importaciones de bibliotecas de terceros
 import cv2
 import numpy as np
 import tensorflow as tf
 
+# 3. Importaciones locales
 from ..model import preprocess_img
 from ..model import load_model
 
