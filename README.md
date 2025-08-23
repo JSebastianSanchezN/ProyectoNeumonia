@@ -44,7 +44,7 @@ El desarrollo sigue el patrón de diseño **MVC (Modelo-Vista-Controlador)**, co
    ```bash
    uv pip install -r requirements.txt
 
-**Versión de Python:** `Python 3.11.9`  
+**Versión de Python recomendada:** `Python 3.11.9`  
 
 ⚠️ **Nota:** Las versiones posteriores a Python 3.11.9 presentaron problemas de compatibilidad con **Tkinter**, por lo que se recomienda utilizar esta versiónpara garantizar una ejecución estable.
 
@@ -78,11 +78,11 @@ https://github.com/user-attachments/assets/4c7cf5ce-1efb-4ade-b27d-20178cdcda4c
 
 **Paso a paso:**
 1. Ingrese la cédula del paciente.
-2. Presione Cargar Imagen y seleccione un archivo de la carpeta data que se encuentra en el repositorio.
-4. Presione Predecir para ver los resultados.
-5. Presione Guardar para almacenar resultados en .csv.
-6. Presione PDF para exportar un informe.
-7. Presione Borrar para reiniciar el proceso.
+2. Presione **Cargar Imagen** y seleccione un archivo de la carpeta `data/` que se encuentra en el repositorio.
+4. Presione **Predecir** para ver los resultados.
+5. Presione **Guardar** para almacenar resultados en `.csv`.
+6. Presione **PDF** para exportar un informe en PDF (se utiliza la librería tkcap).
+7. Presione **Borrar** para reiniciar el proceso.
 
 ---
 ## Resultados
@@ -107,10 +107,10 @@ Predicción de clase y probabilidad:
 ---
 ## Pruebas Unitarias
 
-Se incluyen pruebas con pytest en la carpeta tests/.
+Se incluyen pruebas con pytest en la carpeta `tests/`.
 
 Ejecutar con:
-`pytest.py`
+`pytest`
 
 ---
 ## Estructura del Proyecto
@@ -139,9 +139,6 @@ ProyectoNeumonia/
 │   │     ├── read_img.py
 │   ├── view
 │   │     ├── detector_neumonia.py
-│   ├── grad_cam.py
-│   ├── integrator.py
-│   └── detector_neumonia.py
 │
 ├── tests/                  # Pruebas unitarias
 │   ├── .gitkeep
