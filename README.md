@@ -59,6 +59,7 @@ Para ejecutar el proyecto se tienen dos opciones
 * De lo contrario, se ejecuta:
      ```bash
      uv run -m src.view.detector_neumonia
+⚠️ **Nota:** El archivo .h5 de la CNN encargada de predecir no se encuentra en repositorio por lo que es necesario descargarlo y agregarlo directamente en la carpeta creada con el git clone.
 
 ---
 ## Flujo de Procesamiento
