@@ -1,0 +1,28 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Python version file
+.python-version
+
+# Models (pesados, no se suben al repo)
+*.h5
+*.keras
+
+# Logs
+*.log
+
+# Virtual environment configs
+.env
+
+# Jupyter Notebook
+.ipynb_checkpoints
