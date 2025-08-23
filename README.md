@@ -59,7 +59,7 @@ Para ejecutar el proyecto se tienen dos opciones
      make cod
 * De lo contrario, se ejecuta:
      ```bash
-     uv run detector_neumonia.py
+     uv run -m src.view.detector_neumonia
 
 ---
 ## Flujo de Procesamiento
