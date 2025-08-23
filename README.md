@@ -115,28 +115,35 @@ Ejecutar con:
 
 ---
 ## Estructura del Proyecto
-📁 ProyectoNeumonia/
-├── 📁 data/                  # Datos (pruebas o entrenamiento)
-│   ├── raw/                  # Datos sin procesar
-│   ├── processed/            # Datos preprocesados
-│   └── external/             # Datos externos
-├── 📁 src/                   # Código fuente
+
+```plaintext
+ProyectoNeumonia/
+├── data/                   # Datos (pruebas o entrenamiento)
+│   ├── raw/                # Datos sin procesar
+│   ├── processed/          # Datos preprocesados
+│   └── external/           # Datos externos
+│
+├── src/                    # Código fuente
 │   ├── read_img.py
 │   ├── preprocess_img.py
 │   ├── load_model.py
 │   ├── grad_cam.py
 │   ├── integrator.py
 │   └── detector_neumonia.py
-├── 📁 tests/                 # Pruebas unitarias
-│   └── test_preprocess.py
+│
+├── tests/                  # Pruebas unitarias
+│   ├── test_preprocess.py
 │   └── test_integrator.py
-├── 📁 reports/               # Reportes y figuras
-├── 📁 docs/                  # Documentación adicional
-├── requirements.txt          # Dependencias con versiones
-├── .gitignore                # Ignorar modelo .h5 y datos pesados
-├── LICENSE                   # Licencia
-└── README.md                 # Este archivo
+│
+├── reports/                # Reportes y figuras
+├── docs/                   # Documentación adicional
+│
+├── requirements.txt        # Dependencias con versiones
+├── .gitignore              # Ignorar modelo .h5 y datos pesados
+├── LICENSE                 # Licencia
+└── README.md               # Este archivo
 
+```
 
 ---
 ## Docker
