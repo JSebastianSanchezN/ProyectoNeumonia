@@ -90,18 +90,19 @@ https://github.com/user-attachments/assets/4c7cf5ce-1efb-4ade-b27d-20178cdcda4c
 
 Ejemplo de salida del sistema:
 
+<img width="819" height="596" alt="image" src="https://github.com/user-attachments/assets/b9945b39-d45a-4021-a535-a7075bcec81d" />
 
+Imagen original:
 
-Imagen original
+<img src="https://github.com/user-attachments/assets/907c41d4-d6da-4664-8f51-d562db98cdb9" alt="Imágen original" width="300"/>
 
-<img src="https://github.com/user-attachments/assets/4d3b1c21-d9e3-4d80-b411-130aa939e0e7" alt="Imágen original" width="300"/>
+Imagen procesada:
 
-Imagen procesada
+<img src="https://github.com/user-attachments/assets/8167ebde-6848-4220-b423-ab455e8f6224" alt="Imágen procesada" width="300"/>
 
-<img src="https://github.com/user-attachments/assets/df731296-1abc-422e-9b14-ef4a616bec6a" alt="Imágen procesada" width="250"/>
+Predicción de clase y probabilidad:
 
-
-Predicción de clase y probabilidad
+<img src="https://github.com/user-attachments/assets/4697ee50-f537-4a8c-a1a0-185bcf3707ab" width="300"/>
 
 
 ---
@@ -157,25 +158,5 @@ Santiago Cortes Murcia – [GitHub](https://github.com/SantiagoCorM)
 ## Licencia
 Este proyecto se distribuye bajo la licencia MIT.
 
-Ver archivo LICENSE para más detalles.
-
----
-
-## Observaciones
-
-Durante las pruebas del sistema se identificó una situación relacionada con la visualización de la interfaz gráfica en **Tkinter**:
-
-- En algunos computadores la interfaz se presenta correctamente alineada, mostrando todos los cuadros de texto y etiquetas de manera legible.  
-- En otros equipos, ciertos elementos como el cuadro de texto para ingresar la **cédula del paciente** no aparecen completos y otros se cruzan parcialmente.  
-
-**Interfaz visualizada correctamente:**  
-
-<img width="814" height="590" alt="image" src="https://github.com/user-attachments/assets/25478b43-4ade-4d60-a6ec-e88170e129f7" />
-
-**Interfaz con problemas de visualización:**  
-
-<img width="1111" height="746" alt="image" src="https://github.com/user-attachments/assets/6055371c-0f63-4615-bc20-b5ba76c790fe" />
-
-
-⚠️ **Nota:** Este comportamiento puede deberse a diferencias en la resolución de pantalla, la escala de visualización de Windows o la versión de Python/Tkinter instalada.  
+Ver archivo [LICENSE](LICENSE) para más detalles.
 
