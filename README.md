@@ -1,92 +1,90 @@
-# Proyecto Neumonía
+# Proyecto Neumonía  
 
-## Índice 
-- Descripción
-- Instalación
-- Herramientas utilizadas
-- Acceso al proyecto
-- Contribuidores
-- Licencia
+## Índice  
+- Descripción  
+- Instalación  
+- Ejecución  
+- Flujo de Procesamiento  
+- Uso de la Interfaz Gráfica  
+- Resultados  
+- Pruebas Unitarias  
+- Estructura del Proyecto   
+- Docker  
+- Contribuidores  
+- Licencia  
 
-## Descripción
-Este proyecto implementa un sistema de **clasificación automática de radiografías de tórax en formato DICOM**, utilizando redes neuronales convolucionales (CNN). El objetivo es clasificar las imágenes en tres categorías:
+---
 
+## Descripción  
+Este proyecto implementa un sistema de **clasificación automática de radiografías de tórax en formato DICOM**, utilizando redes neuronales convolucionales (CNN).  
+
+El objetivo es clasificar las imágenes en tres categorías:  
 - Neumonía Bacteriana  
 - Neumonía Viral  
 - Sin Neumonía  
 
-Además, se emplea la técnica **Grad-CAM** para generar mapas de calor que resaltan las regiones relevantes de la imagen que influyen en la predicción del modelo.
+Se utiliza la técnica **Grad-CAM** para generar mapas de calor que resaltan las regiones relevantes de la imagen que influyen en la predicción del modelo.  
 
-El desarrollo sigue el patrón de diseño **MVC (Modelo-Vista-Controlador)**, con un enfoque modular, cohesivo y desacoplado para facilitar su mantenimiento y escalabilidad.
+El desarrollo sigue el patrón de diseño **MVC (Modelo-Vista-Controlador)**, con un enfoque modular, cohesivo y desacoplado para facilitar su mantenimiento y escalabilidad.  
 
-<img width="815" height="589" alt="image" src="https://github.com/user-attachments/assets/878c6a4d-17ca-49e9-a7a5-0dd43278bfbd" />
-
----
-
-## Instalación:
-
-Clonar el repositorio:
-https://github.com/JSebastianSanchezN/ProyectoNeumonia.git
+<img width="600" alt="interfaz" src="https://github.com/user-attachments/assets/878c6a4d-17ca-49e9-a7a5-0dd43278bfbd" />  
 
 ---
 
+## Instalación  
+
+1. Clonar el repositorio:  
+   ```bash
+   git clone https://github.com/JSebastianSanchezN/ProyectoNeumonia.git
+   cd ProyectoNeumonia
+2. Ejecutar
+   ```bash
+   uv run main.py 
+3. Instalar dependencias:
+   ```bash
+   uv pip install -r requirements.txt
+
+---
 ## Ejecución
 
-Ejecutar la interfaz gráfica (tkinter):
+Para ejecutar el proyecto se tienen dos opciones
+* Si la máquina cuenta con la herramienta Make se ejecuta el código:
+     ```bash
+     make cod
+* De lo contrario, se ejecuta:
+     ```bash
+     uv run detector_neumonia.py
 
-cd UAO-Neumonia
-
-  pip install -r requirements.txt
-
-  python detector_neumonia.py
+Versión de Python probada: Python 3.11.9
 
 ---
-
 ## Flujo de Procesamiento
 
-El sistema sigue una arquitectura modular basada en el patrón **MVC (Model-View-Controller)**, donde cada script cumple una función específica dentro del flujo de procesamiento de las imágenes médicas.  
-
-### Scripts principales
-
-- **detector_neumonia.py**  
-  Contiene la interfaz gráfica desarrollada con **Tkinter**.  
-  Los botones de la interfaz llaman métodos definidos en los demás módulos.  
-
-- **read_img.py**  
-  Lee imágenes en formato **DICOM**, las convierte a arreglo y las prepara para su visualización y preprocesamiento.  
-
-- **preprocess_img.py**  
-  Recibe el arreglo proveniente de `read_img.py` y aplica las siguientes transformaciones:  
-  - Resize a 512x512  
-  - Conversión a escala de grises  
-  - Ecualización del histograma con **CLAHE**  
-  - Normalización de la imagen en el rango [0,1]  
-  - Conversión a batch (tensor)  
-
-- **load_model.py**  
-  Carga el modelo entrenado (`WilhemNet86.h5`) para la clasificación de imágenes.  
-
-- **grad_cam.py**  
-  Procesa la imagen y genera:  
-  - Predicción de clase  
-  - Probabilidad asociada  
-  - Mapa de calor Grad-CAM resaltando regiones relevantes.  
-
-- **integrator.py**  
-  Módulo que integra todos los componentes anteriores y retorna solo la información necesaria para la interfaz gráfica:  
-  - Clase predicha  
-  - Probabilidad  
-  - Imagen con mapa Grad-CAM
+El sistema sigue una arquitectura modular (MVC). Cada script cumple una función específica:
+* detector_neumonia.py – Interfaz gráfica con Tkinter.
+* read_img.py – Lee imágenes en formato DICOM y las convierte en arreglos.
+* preprocess_img.py – Preprocesamiento (resize, escala de grises, CLAHE, normalización, batch tensor).
+* load_model.py – Carga el modelo (WilhemNet86.h5).
+* grad_cam.py – Genera predicción, probabilidad y mapa Grad-CAM.
+* integrator.py – Integra todos los módulos y devuelve clase, probabilidad y mapa de calor.
 
 ---
-## Uso de la Interfaz Gráfica:
+## Uso de la Interfaz Gráfica
 
-- Ingrese la cédula del paciente en la caja de texto
-- Presione el botón 'Cargar Imagen', seleccione la imagen del explorador de archivos del computador (Imagenes de prueba en https://drive.google.com/drive/folders/1WOuL0wdVC6aojy8IfssHcqZ4Up14dy0g?usp=drive_link)
-- Presione el botón 'Predecir' y espere unos segundos hasta que observe los resultados
-- Presione el botón 'Guardar' para almacenar la información del paciente en un archivo excel con extensión .csv
-- Presione el botón 'PDF' para descargar un archivo PDF con la información desplegada en la interfaz
-- Presión el botón 'Borrar' si desea cargar una nueva imagen
+Ingrese la cédula del paciente.
+
+Presione Cargar Imagen y seleccione un archivo DICOM.
+
+Imágenes de prueba disponibles en: Google Drive
+
+Presione Predecir para ver los resultados.
+
+Presione Guardar para almacenar resultados en .csv.
+
+Presione PDF para exportar un informe (librería utilizada: tkcap).
+
+Presione Borrar para reiniciar el proceso.
+
 ---
 ## Resultados
 
@@ -101,10 +99,48 @@ Predicción de clase y probabilidad
 Mapa de calor generado por Grad-CAM
 
 ---
+## Pruebas Unitarias
+Se incluyen pruebas con pytest en la carpeta tests/.
+Ejecutar con:
+pytest
 
-## Contribuidores:
+---
+## Estructura del Proyecto
+📁 ProyectoNeumonia/
+├── 📁 data/                  # Datos (pruebas o entrenamiento)
+│   ├── raw/                  # Datos sin procesar
+│   ├── processed/            # Datos preprocesados
+│   └── external/             # Datos externos
+├── 📁 src/                   # Código fuente
+│   ├── read_img.py
+│   ├── preprocess_img.py
+│   ├── load_model.py
+│   ├── grad_cam.py
+│   ├── integrator.py
+│   └── detector_neumonia.py
+├── 📁 tests/                 # Pruebas unitarias
+│   └── test_preprocess.py
+│   └── test_integrator.py
+├── 📁 reports/               # Reportes y figuras
+├── 📁 docs/                  # Documentación adicional
+├── requirements.txt          # Dependencias con versiones
+├── .gitignore                # Ignorar modelo .h5 y datos pesados
+├── LICENSE                   # Licencia
+└── README.md                 # Este archivo
 
-* Johan Sebastian Sanchez Navas - https://github.com/JSebastianSanchezN
-* Angel David Duarte Loaiza - https://github.com/AngelDDL
-* Sharis Aranxa Barbosa Prado - https://github.com/SAranxa
-* Santiago Cortes Murcia - https://github.com/SantiagoCorM
+
+---
+## Contribuidores
+
+Johan Sebastian Sanchez Navas – GitHub
+
+Angel David Duarte Loaiza – GitHub
+
+Sharis Aranxa Barbosa Prado – GitHub
+
+Santiago Cortes Murcia – GitHub
+
+---
+## Licencia
+Este proyecto se distribuye bajo la licencia MIT.
+Ver archivo LICENSE para más detalles.
